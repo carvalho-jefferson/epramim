@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+  <div>
+    <h1 style="font-size: 20px; font-weight: 600; color: #1a1a1a;">Dashboard</h1>
+    <p style="font-size: 13px; color: #999; margin-top: 4px;">Manage your products</p>
+  </div>
+  <a href="/admin/product/new" class="btn btn-primary" style="text-decoration: none; font-size: 13px;">
+    + New product
+  </a>
+</div>
+
+{% if message %}
+<div class="alert alert-success">{{ message }}</div>
+{% endif %}
+
+<div class="card">
+  <div class="card-title">Products ({{ products | length }})</div>
+
+  {% if products %}
+  <table style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr style="border-bottom: 1px solid #f0f0f0;">
+        <th style="text-align: left; padding: 8px 0; font-size: 12px; color: #999; font-weight: 500;">Name</th>
+        <th style="text-align: left; padding: 8px 0; font-size: 12px; color: #999; font-weight: 500;">Brand</th>
+        <th style="text-align: left; padding: 8px 0; font-size: 12px; color: #999; font-weight: 500;">Category</th>
+        <th style="text-align: left; padding: 8px 0; font-size: 12px; color: #999; font-weight: 500;">Price</th>
+        <th style="text-align: left; padding: 8px 0; font-size: 12px; color: #999; font-weight: 500;">Score</th>
+        <th style="text-align: right; padding: 8px 0; font-size: 12px; color: #999; font-weight: 500;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr style="border-bottom: 1px solid #f9f9f9;">
+        <td style="padding: 12px 0; font-size: 13px; font-weight: 500; color: #1a1a1a;">{{ product.name }}</td>
+        <td style="padding: 12px 0; font-size: 13px; color: #666;">{{ product.brand }}</td>
+        <td style="padding: 12px 0;">
+          <span style="font-size: 11px; padding: 2px 8px; border-radius: 20px; background: #f0fafb; color: #4eabb6;">
+            {{ product.category }}
+          </span>
+        </td>
+        <td style="padding: 12px 0; font-size: 13px; color: #666;">
+          {% if product.current_price %}R$ {{ "%.2f"|format(product.current_price) }}{% else %}—{% endif %}
+        </td>
+        <td style="padding: 12px 0; font-size: 13px; color: #4eabb6; font-weight: 500;">
+          {{ product.overall_score or '—' }}
+        </td>
+        <td style="padding: 12px 0; text-align: right;">
+          <a href="/admin/product/{{ product.id }}/edit"
+             style="font-size: 12px; color: #4eabb6; text-decoration: none; margin-right: 12px;">
+            Edit
+          </a>
+          <a href="/admin/product/{{ product.id }}/delete"
+             style="font-size: 12px; color: #e53e3e; text-decoration: none;"
+             onclick="return confirm('Delete {{ product.name }}?')">
+            Delete
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color: #999; font-size: 13px; text-align: center; padding: 32px 0;">
+    No products yet. <a href="/admin/product/new" style="color: #4eabb6;">Add your first product →</a>
+  </p>
+  {% endif %}
+</div>
+{% endblock %}

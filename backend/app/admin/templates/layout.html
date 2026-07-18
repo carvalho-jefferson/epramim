@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin — É pra mim?</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f4f6f8;
+      color: #1a1a1a;
+      font-size: 14px;
+    }
+
+    .navbar {
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-logo {
+      font-size: 16px;
+      font-weight: 600;
+      color: #4eabb6;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .navbar a {
+      font-size: 13px;
+      color: #666;
+      text-decoration: none;
+    }
+
+    .navbar a:hover { color: #4eabb6; }
+
+    .logout-btn {
+      font-size: 12px;
+      color: #999;
+      text-decoration: none;
+      border: 1px solid #e5e7eb;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .logout-btn:hover {
+      color: #e53e3e !important;
+      border-color: #e53e3e;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 32px auto;
+      padding: 0 24px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #4eabb6;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f0fafb;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-grid.cols-3 {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .form-grid.cols-1 {
+      grid-template-columns: 1fr;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .field label {
+      font-size: 12px;
+      color: #666;
+      font-weight: 500;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      border: 1px solid #e5e7eb;
+      border-radius: 7px;
+      padding: 8px 10px;
+      font-size: 13px;
+      color: #1a1a1a;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.15s;
+      font-family: inherit;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: #4eabb6;
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 72px;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #4eabb6;
+    }
+
+    .checkbox-row label {
+      font-size: 13px;
+      color: #444;
+    }
+
+    .btn {
+      padding: 10px 24px;
+      border-radius: 8px;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-primary {
+      background: #4eabb6;
+      color: #fff;
+    }
+
+    .btn-primary:hover { background: #2d8a96; }
+
+    .btn-secondary {
+      background: #f4f6f8;
+      color: #444;
+      border: 1px solid #e5e7eb;
+    }
+
+    .btn-secondary:hover { background: #e5e7eb; }
+
+    .alert {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    .alert-success {
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    .alert-error {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: #f0f0f0;
+      margin: 8px 0 20px;
+    }
+
+    .price-entry {
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+      background: #fafafa;
+    }
+
+    .add-price-btn {
+      font-size: 12px;
+      color: #4eabb6;
+      background: none;
+      border: 1px dashed #4eabb6;
+      border-radius: 7px;
+      padding: 8px 16px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .add-price-btn:hover { background: #f0fafb; }
+
+    .remove-btn {
+      font-size: 11px;
+      color: #999;
+      background: none;
+      border: none;
+      cursor: pointer;
+      float: right;
+    }
+
+    .remove-btn:hover { color: #e53e3e; }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <span class="navbar-logo">É pra mim? — Admin</span>
+    <div class="navbar-right">
+      <a href="/admin">Dashboard</a>
+      <a href="/admin/product/new">+ New product</a>
+      <a href="/admin/logout" class="logout-btn">Logout</a>
+    </div>
+  </div>
+
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>
