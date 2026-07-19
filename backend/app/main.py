@@ -7,7 +7,6 @@ import os
 from dotenv import load_dotenv
 from .routers import products, compare
 from .admin.router import router as admin_router
-from .routers import products, compare
 
 load_dotenv()
 
