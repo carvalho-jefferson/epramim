@@ -237,7 +237,7 @@ export default async function ProductPage({ params }: PageProps) {
             label="Preço"
             value={
               <span className="font-medium text-teal-500">
-                R$ {formatBRL(product.current_price)}
+                {formatBRL(product.current_price)}
               </span>
             }
           />
