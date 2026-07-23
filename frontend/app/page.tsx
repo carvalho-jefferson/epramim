@@ -226,8 +226,7 @@ export default function Home() {
                         {selectedA.name}
                       </div>
                       <div className="text-xs text-gray-400">
-                        {selectedA.brand} · R${" "}
-                        {formatBRL(selectedA.current_price)}
+                        {selectedA.brand} · {formatBRL(selectedA.current_price)}
                       </div>
                     </div>
                   </div>

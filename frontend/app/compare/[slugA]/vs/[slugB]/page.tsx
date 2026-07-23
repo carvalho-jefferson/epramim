@@ -310,7 +310,7 @@ export default async function ComparePage({ params }: PageProps) {
             {a.name}
           </Link>
           <div className="text-sm text-teal-500">
-            R$ {formatBRL(a.current_price)}
+            {formatBRL(a.current_price)}
           </div>
         </div>
         <div className="flex items-center justify-center">
@@ -326,7 +326,7 @@ export default async function ComparePage({ params }: PageProps) {
             {b.name}
           </Link>
           <div className="text-sm text-teal-500">
-            R$ {formatBRL(b.current_price)}
+            {formatBRL(b.current_price)}
           </div>
         </div>
       </div>
