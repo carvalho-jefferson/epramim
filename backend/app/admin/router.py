@@ -1,6 +1,8 @@
 from fastapi import APIRouter, Request, Depends
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 import os
@@ -11,6 +13,8 @@ from ..models import (
 )
 
 router = APIRouter(prefix="/admin", tags=["admin"])
+
+limiter = Limiter(key_func=get_remote_address)
 
 templates = Jinja2Templates(
     directory=os.path.join(os.path.dirname(__file__), "templates")
@@ -42,6 +46,7 @@ def login_page(request: Request):
 
 
 @router.post("/login")
+@limiter.limit("5/minute")
 async def login(request: Request):
     form = await request.form()
     password = form.get("password", "")
@@ -335,14 +340,14 @@ async def update_product(product_id: int, request: Request, db: Session = Depend
 
 # ── Delete product ─────────────────────────────────────
 
-@router.get("/product/{product_id}/delete")
-def delete_product(product_id: int, request: Request, db: Session = Depends(get_db)):
+@router.post("/product/{product_id}/delete")
+async def delete_product(product_id: int, request: Request, db: Session = Depends(get_db)):
     if not is_authenticated(request):
         return RedirectResponse("/admin/login", status_code=302)
     product = db.query(Product).filter(Product.id == product_id).first()
     if product:
         name = product.name
-        db.execute(text(f"DELETE FROM products WHERE id = {product_id}"))
+        db.delete(product)
         db.commit()
         return RedirectResponse(f"/admin?message=Product '{name}' deleted successfully.", status_code=302)
     return RedirectResponse("/admin", status_code=302)
