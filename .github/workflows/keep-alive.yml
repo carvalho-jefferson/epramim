@@ -1,13 +1,11 @@
 name: Keep Render Alive
-
 on:
   schedule:
-    - cron: "*/14 * * * *"
+    - cron: '*/14 * * * *'
   workflow_dispatch:
-
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
       - name: Ping backend
-        run: curl -s https://epramim.onrender.com/ || true
+        run: curl -s https://epramim.onrender.com/health || true

@@ -41,3 +41,7 @@ app.include_router(admin_router)
 @limiter.limit("30/minute")
 def root(request: Request):
     return {"message": "API is running"}
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
