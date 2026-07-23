@@ -9,7 +9,7 @@ Plataforma de comparação de produtos eletrônicos com foco em ajudar o usuári
 </p>
 
 <p align="center">
-    <a href="https://epramim-three.vercel.app">Ver demonstração</a>
+    <a href="https://epramim.vercel.app/">Ver demonstração</a>
 </p>
 
 ## Sobre o projeto
