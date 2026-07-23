@@ -51,11 +51,12 @@
              style="font-size: 12px; color: #4eabb6; text-decoration: none; margin-right: 12px;">
             Edit
           </a>
-          <a href="/admin/product/{{ product.id }}/delete"
-             style="font-size: 12px; color: #e53e3e; text-decoration: none;"
-             onclick="return confirm('Delete {{ product.name }}?')">
-            Delete
-          </a>
+          <form method="POST" action="/admin/product/{{ product.id }}/delete" style="display:inline"
+                onsubmit="return confirm('Delete {{ product.name }}?')">
+            <button type="submit" style="background:none;border:none;color:#e53e3e;font-size:12px;cursor:pointer;">
+              Delete
+            </button>
+          </form>
         </td>
       </tr>
       {% endfor %}
