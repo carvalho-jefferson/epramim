@@ -4,9 +4,13 @@ Plataforma de comparação de produtos eletrônicos com foco em ajudar o usuári
 
 <!-- ![Screenshot](assets/home.png) -->
 
-<p align="center">
+Início | Comparação | Admin
+--|--|--
+![Início](assets/home.png)| ![Comparação](assets/compare.png)| ![Admin](assets/admin-panel.png)
+
+<!-- <p align="center">
     <img src="assets/home.png" width="70%">
-</p>
+</p> -->
 
 <p align="center">
     <a href="https://epramim.vercel.app/">Ver demonstração</a>
